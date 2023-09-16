@@ -14,7 +14,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor(named: "PBackgroundColor")
     }
     
     override func viewWillAppear(_ animated: Bool) {
