@@ -20,10 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        if let user = Auth.auth().currentUser {
+        if let _ = Auth.auth().currentUser {
             window.rootViewController = HomeVC()
         } else {
-            window.rootViewController = StartVC()
+            window.rootViewController = UINavigationController(rootViewController: StartVC())
         }
         
         window.makeKeyAndVisible()

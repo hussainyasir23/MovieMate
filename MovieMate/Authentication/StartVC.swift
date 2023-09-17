@@ -44,16 +44,24 @@ class StartVC: UIViewController {
     }()
     
     private lazy var signUpButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setTitle("Get Started", for: .normal)
+        let button = UIButton(type: .system)
+        button.setTitle("Sign Up", for: .normal)
         button.styleAsButton()
+        button.addTarget(self, action: #selector(didSelectSignUp), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
+        button.alpha = 0
         return button
     }()
     
-    private lazy var logInButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setTitle("Log In", for: .normal)
+    private lazy var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Login", for: .normal)
         button.styleAsButton()
+        button.addTarget(self, action: #selector(didSelectLogin), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
+        button.alpha = 0
         return button
     }()
     
@@ -62,14 +70,15 @@ class StartVC: UIViewController {
         configureViews()
     }
     
-    func configureViews() {
+    private func configureViews() {
         
         self.view.backgroundColor = UIColor(named: "PBackgroundColor")
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.view.addSubview(logoImageView)
         self.view.addSubview(titleLabel)
         self.view.addSubview(taglineLabel)
         self.view.addSubview(signUpButton)
-        self.view.addSubview(logInButton)
+        self.view.addSubview(loginButton)
         
         setupInitialConstraints()
     }
@@ -92,13 +101,13 @@ class StartVC: UIViewController {
         
         signUpButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         signUpButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-        signUpButton.bottomAnchor.constraint(equalTo: self.logInButton.topAnchor, constant: -24).isActive = true
+        signUpButton.bottomAnchor.constraint(equalTo: self.loginButton.topAnchor, constant: -24).isActive = true
         signUpButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
-        logInButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
-        logInButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-        logInButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -64).isActive = true
-        logInButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        loginButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
+        loginButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
+        loginButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -64).isActive = true
+        loginButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -145,9 +154,30 @@ class StartVC: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations: {
             self.signUpButton.alpha = 1
             self.signUpButton.isHidden = false
-            self.logInButton.alpha = 1
-            self.logInButton.isHidden = false
+            self.loginButton.alpha = 1
+            self.loginButton.isHidden = false
         }, completion: nil)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateColorsForCurrentTheme()
+        }
+    }
+    
+    private func updateColorsForCurrentTheme() {
+        signUpButton.styleAsButton()
+        loginButton.styleAsButton()
+    }
+    
+    @objc func didSelectSignUp() {
+        self.navigationController?.pushViewController(SignUpVC(), animated: true)
+    }
+    
+    @objc func didSelectLogin() {
+        self.navigationController?.pushViewController(LoginVC(), animated: true)
     }
 }
 
@@ -165,8 +195,5 @@ fileprivate extension UIButton {
         layer.shadowColor = UIColor(named: "PTextColor")?.cgColor
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: 2, height: 2)
-        translatesAutoresizingMaskIntoConstraints = false
-        isHidden = true
-        alpha = 0
     }
 }

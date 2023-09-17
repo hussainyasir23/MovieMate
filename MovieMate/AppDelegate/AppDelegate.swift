@@ -15,6 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        
+        let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.tintColor = UIColor(named: "PTextColor")
+        navigationBarAppearance.barTintColor = UIColor(named: "PBackgroundColor")
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(named: "PTextColor")!]
+        
+        if let backButtonImage = UIImage(named: "Back")?.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -8, bottom: 8, right: 0)) {
+            navigationBarAppearance.backIndicatorImage = backButtonImage
+            navigationBarAppearance.backIndicatorTransitionMaskImage = backButtonImage
+        }
+        
         return true
     }
     
