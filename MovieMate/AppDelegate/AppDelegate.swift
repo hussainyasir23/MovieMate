@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.tintColor = UIColor(named: "PTextColor")
-        navigationBarAppearance.barTintColor = UIColor(named: "PBackgroundColor")
-        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(named: "PTextColor")!]
+        navigationBarAppearance.tintColor = ColorConstants.textPrimary
+        navigationBarAppearance.barTintColor = ColorConstants.backgroundPrimary
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: ColorConstants.textPrimary]
         
         if let backButtonImage = UIImage(named: "Back")?.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -8, bottom: 8, right: 0)) {
             navigationBarAppearance.backIndicatorImage = backButtonImage

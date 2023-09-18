@@ -11,17 +11,15 @@ class SignUpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureViews()
+        setupViews()
+        setupLayout()
     }
     
-    func configureViews() {
-        
-        self.view.backgroundColor = UIColor(named: "PBackgroundColor")
-        
-        setupInitialConstraints()
+    private func setupViews() {
+        view.backgroundColor = ColorConstants.backgroundPrimary
     }
     
-    func setupInitialConstraints() {
+    private func setupLayout() {
         
     }
 }

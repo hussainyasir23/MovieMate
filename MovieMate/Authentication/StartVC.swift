@@ -9,9 +9,10 @@ import UIKit
 
 class StartVC: UIViewController {
     
+    // UI Components
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "LogoImage")
+        imageView.image = ImageConstants.logo
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +47,7 @@ class StartVC: UIViewController {
     private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
-        button.styleAsButton()
+        button.styleAsLoginButton()
         button.addTarget(self, action: #selector(didSelectSignUp), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isHidden = true
@@ -57,7 +58,7 @@ class StartVC: UIViewController {
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
-        button.styleAsButton()
+        button.styleAsLoginButton()
         button.addTarget(self, action: #selector(didSelectLogin), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isHidden = true
@@ -67,46 +68,45 @@ class StartVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureViews()
+        setupViews()
+        setupLayouts()
     }
     
-    private func configureViews() {
+    private func setupViews() {
         
-        self.view.backgroundColor = UIColor(named: "PBackgroundColor")
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.view.addSubview(logoImageView)
-        self.view.addSubview(titleLabel)
-        self.view.addSubview(taglineLabel)
-        self.view.addSubview(signUpButton)
-        self.view.addSubview(loginButton)
-        
-        setupInitialConstraints()
+        view.backgroundColor = ColorConstants.backgroundPrimary
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        view.addSubview(logoImageView)
+        view.addSubview(titleLabel)
+        view.addSubview(taglineLabel)
+        view.addSubview(signUpButton)
+        view.addSubview(loginButton)
     }
     
-    private func setupInitialConstraints() {
+    private func setupLayouts() {
         
-        logoImageView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
-        logoImageView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-        logoImageView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        logoCenterYConstraint = logoImageView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor)
+        logoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
+        logoImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
+        logoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        logoCenterYConstraint = logoImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         logoCenterYConstraint?.isActive = true
         
-        titleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 16).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 16).isActive = true
         
-        taglineLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
-        taglineLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-        taglineLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 8).isActive = true
+        taglineLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
+        taglineLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
+        taglineLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
         
-        signUpButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
-        signUpButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-        signUpButton.bottomAnchor.constraint(equalTo: self.loginButton.topAnchor, constant: -24).isActive = true
+        signUpButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
+        signUpButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
+        signUpButton.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -24).isActive = true
         signUpButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
-        loginButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
-        loginButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-        loginButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -64).isActive = true
+        loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
+        loginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
+        loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
     
@@ -119,7 +119,7 @@ class StartVC: UIViewController {
     private func animateLogoToTop() {
         
         logoCenterYConstraint?.isActive = false
-        logoTopConstraint = logoImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 64)
+        logoTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64)
         logoTopConstraint?.isActive = true
         
         UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
@@ -168,32 +168,15 @@ class StartVC: UIViewController {
     }
     
     private func updateColorsForCurrentTheme() {
-        signUpButton.styleAsButton()
-        loginButton.styleAsButton()
+        signUpButton.styleAsLoginButton()
+        loginButton.styleAsLoginButton()
     }
     
-    @objc func didSelectSignUp() {
-        self.navigationController?.pushViewController(SignUpVC(), animated: true)
+    @objc private func didSelectSignUp() {
+        navigationController?.pushViewController(SignUpVC(), animated: true)
     }
     
-    @objc func didSelectLogin() {
-        self.navigationController?.pushViewController(LoginVC(), animated: true)
-    }
-}
-
-fileprivate extension UIButton {
-    
-    func styleAsButton() {
-        setTitleColor(UIColor(named: "PTextColor"), for: .normal)
-        titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        backgroundColor = UIColor(named: "PBackgroundColor")
-        contentMode = .center
-        titleLabel?.textAlignment = .center
-        layer.cornerRadius = 8
-        layer.borderWidth = 2
-        layer.borderColor = UIColor(named: "PTextColor")?.cgColor
-        layer.shadowColor = UIColor(named: "PTextColor")?.cgColor
-        layer.shadowOpacity = 0.5
-        layer.shadowOffset = CGSize(width: 2, height: 2)
+    @objc private func didSelectLogin() {
+        navigationController?.pushViewController(LoginVC(), animated: true)
     }
 }
