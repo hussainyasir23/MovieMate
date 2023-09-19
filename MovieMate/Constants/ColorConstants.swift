@@ -9,12 +9,12 @@ import UIKit
 
 struct ColorConstants {
     
-    public static let backgroundPrimary: UIColor = UIColor(named: "PBackgroundColor")!
-    public static let backgroundSecondary: UIColor = UIColor(named: "SBackgroundColor")!
-    public static let backgroundTertiary: UIColor = UIColor(named: "TBackgroundColor")!
+    public static let backgroundPrimary: UIColor = UIColor(named: "background.primary")!
+    public static let backgroundSecondary: UIColor = UIColor(named: "background.secondary")!
+    public static let backgroundTertiary: UIColor = UIColor(named: "background.tertiary")!
     
-    public static let textPrimary: UIColor = UIColor(named: "PTextColor")!
-    public static let textSecondary: UIColor = UIColor(named: "STextColor")!
-    public static let textTertiary: UIColor = UIColor(named: "TTextColor")!
+    public static let contentPrimary: UIColor = UIColor(named: "content.primary")!
+    public static let contentSecondary: UIColor = UIColor(named: "content.secondary")!
+    public static let contentTertiary: UIColor = UIColor(named: "content.tertiary")!
     
 }

@@ -9,10 +9,10 @@ import UIKit
 
 struct ImageConstants {
     
-    public static let logo: UIImage = UIImage(named: "LogoImage")!
+    public static let logo: UIImage = UIImage(named: "logo.image")!
     
-    public static let backIcon: UIImage = UIImage(named: "Back")!
-    public static let emailIcon: UIImage = UIImage(named: "Email")!
-    public static let passwordIcon: UIImage = UIImage(named: "Password")!
+    public static let back: UIImage = UIImage(systemName: "arrow.backward")!
+    public static let email: UIImage = UIImage(systemName: "envelope")!
+    public static let password: UIImage = UIImage(systemName: "lock")!
     
 }

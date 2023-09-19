@@ -13,7 +13,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         let textField = UITextField()
         textField.delegate = self
         textField.placeholder = "Email"
-        textField.textColor = ColorConstants.textPrimary
+        textField.textColor = ColorConstants.contentPrimary
         textField.backgroundColor = ColorConstants.backgroundSecondary
         textField.layer.cornerRadius = 8
         textField.autocapitalizationType = .none
@@ -24,7 +24,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         let emailIconView = UIImageView(frame: CGRect(x: 7.5, y: 2.5, width: 15, height: 15))
-        emailIconView.image = ImageConstants.emailIcon
+        emailIconView.image = ImageConstants.email
+        emailIconView.tintColor = ColorConstants.contentPrimary
         emailIconView.contentMode = .scaleAspectFit
         
         let emailIconContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 20))
@@ -38,7 +39,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     private lazy var emailValidationLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.textColor = ColorConstants.textSecondary
+        label.textColor = ColorConstants.contentSecondary
         label.font = UIFont.systemFont(ofSize: 13 ,weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -48,7 +49,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         let textField = UITextField()
         textField.delegate = self
         textField.placeholder = "Password"
-        textField.textColor = ColorConstants.textPrimary
+        textField.textColor = ColorConstants.contentPrimary
         textField.backgroundColor = ColorConstants.backgroundSecondary
         textField.layer.cornerRadius = 8
         textField.autocapitalizationType = .none
@@ -59,8 +60,9 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         let passwordIconView = UIImageView(frame: CGRect(x: 7.5, y: 2.5, width: 15, height: 15))
-        passwordIconView.image = ImageConstants.passwordIcon
+        passwordIconView.image = ImageConstants.password
         passwordIconView.contentMode = .scaleAspectFit
+        passwordIconView.tintColor = ColorConstants.contentPrimary
         
         let passwordIconContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 20))
         passwordIconContainerView.addSubview(passwordIconView)
@@ -82,7 +84,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     private lazy var passwordValidationLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.textColor = ColorConstants.textSecondary
+        label.textColor = ColorConstants.contentSecondary
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

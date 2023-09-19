@@ -17,14 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.tintColor = ColorConstants.textPrimary
+        navigationBarAppearance.tintColor = ColorConstants.contentPrimary
         navigationBarAppearance.barTintColor = ColorConstants.backgroundPrimary
-        navigationBarAppearance.titleTextAttributes = [.foregroundColor: ColorConstants.textPrimary]
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: ColorConstants.contentPrimary]
         
-        if let backButtonImage = UIImage(named: "Back")?.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -8, bottom: 8, right: 0)) {
-            navigationBarAppearance.backIndicatorImage = backButtonImage
-            navigationBarAppearance.backIndicatorTransitionMaskImage = backButtonImage
-        }
+        let backButtonImage = ImageConstants.back
+        navigationBarAppearance.backIndicatorImage = backButtonImage
+        navigationBarAppearance.backIndicatorTransitionMaskImage = backButtonImage
         
         return true
     }
