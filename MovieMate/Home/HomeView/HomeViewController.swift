@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     var presenter: HomePresenterProtocol?
     private var handle: AuthStateDidChangeListenerHandle?
     private var trendingMovies: [Movie] = []
-    private var backdropImageViews: [UIImageView] = []
+    private var backDropViews: [CarouselItemView] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -85,16 +85,14 @@ class HomeViewController: UIViewController {
                                                          height: (self.view.bounds.width / 1280) * 720)
             
             for (index, movie) in self.trendingMovies.enumerated() {
-                let imageView = UIImageView(frame: CGRect(x: self.view.bounds.width * CGFloat(index),
+                let carouselItem = CarouselItemView(frame: CGRect(x: self.view.bounds.width * CGFloat(index),
                                                           y: 0,
                                                           width: self.view.bounds.width,
                                                           height: (self.view.bounds.width / 1280) * 720))
-                
-                imageView.image = UIImage(named: "placeholder")
-                imageView.contentMode = .scaleAspectFit
-                self.backdropImageViews.append(imageView)
+                carouselItem.updateTitle(movie.title, rating: movie.vote_average)
+                self.backDropViews.append(carouselItem)
                 self.presenter?.fetchBackDrop(for: movie)
-                self.trendingScrollView.addSubview(imageView)
+                self.trendingScrollView.addSubview(carouselItem)
             }
             
             self.trendingPageControl.numberOfPages = trendingMovies.count
@@ -119,8 +117,8 @@ extension HomeViewController: HomeViewControllerProtocol {
                 return
             }
             if let index = self.trendingMovies.firstIndex(where: { $0.id == movie.id }) {
-                let imageView = self.backdropImageViews[index]
-                imageView.image = backDrop
+                let carouselItem = self.backDropViews[index]
+                carouselItem.updateBackDrop(backDrop)
             }
         }
     }

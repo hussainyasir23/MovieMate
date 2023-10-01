@@ -26,6 +26,7 @@
 		54E355D52AC9664E00735BBC /* APIBaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E355D42AC9664E00735BBC /* APIBaseURL.swift */; };
 		54E355D72AC968A100735BBC /* FetchPoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E355D62AC968A100735BBC /* FetchPoster.swift */; };
 		54E355DA2AC9A16500735BBC /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E355D92AC9A16500735BBC /* Movie.swift */; };
+		54E355DE2AC9C1B700735BBC /* CarouselItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E355DD2AC9C1B700735BBC /* CarouselItemView.swift */; };
 		54EAAA572AB5C0440091A383 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EAAA562AB5C0440091A383 /* AppDelegate.swift */; };
 		54EAAA592AB5C0440091A383 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EAAA582AB5C0440091A383 /* SceneDelegate.swift */; };
 		54EAAA5B2AB5C0440091A383 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EAAA5A2AB5C0440091A383 /* HomeViewController.swift */; };
@@ -63,6 +64,7 @@
 		54E355D42AC9664E00735BBC /* APIBaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIBaseURL.swift; sourceTree = "<group>"; };
 		54E355D62AC968A100735BBC /* FetchPoster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPoster.swift; sourceTree = "<group>"; };
 		54E355D92AC9A16500735BBC /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		54E355DD2AC9C1B700735BBC /* CarouselItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselItemView.swift; sourceTree = "<group>"; };
 		54EAAA532AB5C0440091A383 /* MovieMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54EAAA562AB5C0440091A383 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54EAAA582AB5C0440091A383 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				54EAAA5A2AB5C0440091A383 /* HomeViewController.swift */,
 				54E355C92AC956AD00735BBC /* HomeViewControllerProtocol.swift */,
+				54E355DC2AC9C17D00735BBC /* Views */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -187,6 +190,14 @@
 				54E355D92AC9A16500735BBC /* Movie.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		54E355DC2AC9C17D00735BBC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				54E355DD2AC9C1B700735BBC /* CarouselItemView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		54EAAA4A2AB5C0440091A383 = {
@@ -366,6 +377,7 @@
 				54E355CF2AC9577A00735BBC /* HomePresenterProtocol.swift in Sources */,
 				54E355BB2AC930D400735BBC /* UseCase.swift in Sources */,
 				54E355B42AC92FC400735BBC /* NetworkManagerProtocol.swift in Sources */,
+				54E355DE2AC9C1B700735BBC /* CarouselItemView.swift in Sources */,
 				54ECF5BA2AB88416006F2162 /* UIButton+Extension.swift in Sources */,
 				54E355C72AC955AD00735BBC /* HomeRouterProtocol.swift in Sources */,
 				54E355C42AC9554600735BBC /* HomePresenter.swift in Sources */,
