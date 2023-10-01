@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class HomeViewController: UIViewController, HomeViewControllerProtocol, UIScrollViewDelegate {
+class HomeViewController: UIViewController {
     
     var presenter: HomePresenterProtocol?
     private var handle: AuthStateDidChangeListenerHandle?
@@ -38,6 +38,71 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol, UIScroll
         setupScrollView()
         setupPageControl()
     }
+    
+    private lazy var trendingScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.delegate = self
+        scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private lazy var trendingPageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.backgroundColor = ColorConstants.backgroundPrimary
+        pageControl.currentPageIndicatorTintColor = ColorConstants.contentPrimary
+        pageControl.pageIndicatorTintColor = ColorConstants.contentTertiary
+        pageControl.isUserInteractionEnabled = false
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        return pageControl
+    }()
+    
+    private func setupScrollView() {
+        view.addSubview(trendingScrollView)
+        trendingScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        trendingScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        trendingScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        trendingScrollView.heightAnchor.constraint(equalToConstant: (self.view.bounds.width / 1280) * 720).isActive = true
+    }
+    
+    private func setupPageControl() {
+        view.addSubview(trendingPageControl)
+        trendingPageControl.topAnchor.constraint(equalTo: trendingScrollView.bottomAnchor, constant: 8).isActive = true
+        trendingPageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    private func setupCarousel() {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            guard let self = self else {
+                return
+            }
+            
+            self.trendingScrollView.contentSize = CGSize(width: self.view.bounds.width * CGFloat(trendingMovies.count),
+                                                         height: (self.view.bounds.width / 1280) * 720)
+            
+            for (index, movie) in self.trendingMovies.enumerated() {
+                let imageView = UIImageView(frame: CGRect(x: self.view.bounds.width * CGFloat(index),
+                                                          y: 0,
+                                                          width: self.view.bounds.width,
+                                                          height: (self.view.bounds.width / 1280) * 720))
+                
+                imageView.image = UIImage(named: "placeholder")
+                imageView.contentMode = .scaleAspectFit
+                self.backdropImageViews.append(imageView)
+                self.presenter?.fetchBackDrop(for: movie)
+                self.trendingScrollView.addSubview(imageView)
+            }
+            
+            self.trendingPageControl.numberOfPages = trendingMovies.count
+        }
+    }
+}
+
+extension HomeViewController: HomeViewControllerProtocol {
     
     func displayTrendingMovies(_ trendingMovies: [Movie]) {
         self.trendingMovies = trendingMovies
@@ -71,66 +136,11 @@ class HomeViewController: UIViewController, HomeViewControllerProtocol, UIScroll
     func failedToFetchPoster(for movie: Movie) {
         
     }
-    
-    private let scrollView = UIScrollView()
-    private let pageControl = UIPageControl()
-    
-    private func setupScrollView() {
-        scrollView.delegate = self
-        scrollView.isPagingEnabled = true
-        scrollView.showsHorizontalScrollIndicator = false
-        view.addSubview(scrollView)
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.heightAnchor.constraint(equalToConstant: 200)
-        ])
-    }
-    
-    private func setupPageControl() {
-        view.addSubview(pageControl)
-        
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            pageControl.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10),
-            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        pageControl.tintColor = ColorConstants.contentTertiary
-        pageControl.currentPageIndicatorTintColor = ColorConstants.contentPrimary
-        pageControl.backgroundColor = ColorConstants.backgroundSecondary
-        pageControl.isUserInteractionEnabled = false
-    }
-    
-    private func setupCarousel() {
-        DispatchQueue.main.async { [weak self] in
-            
-            guard let self = self else {
-                return
-            }
-            self.scrollView.contentSize = CGSize(width: self.view.bounds.width * CGFloat(trendingMovies.count), height: 200)
-            
-            for (index, movie) in self.trendingMovies.enumerated() {
-                let imageView = UIImageView(frame: CGRect(x: self.view.bounds.width * CGFloat(index),
-                                                          y: 0,
-                                                          width: self.view.bounds.width,
-                                                          height: 200))
-                
-                imageView.image = UIImage(named: "placeholder")
-                imageView.contentMode = .scaleAspectFit
-                self.backdropImageViews.append(imageView)
-                self.presenter?.fetchBackDrop(for: movie)
-                self.scrollView.addSubview(imageView)
-            }
-            
-            self.pageControl.numberOfPages = trendingMovies.count
-        }
-    }
-    
+}
+
+extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / self.view.bounds.width)
-        pageControl.currentPage = page
+        trendingPageControl.currentPage = page
     }
 }
