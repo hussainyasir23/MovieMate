@@ -17,4 +17,6 @@ struct ColorConstants {
     public static let contentSecondary: UIColor = UIColor(named: "content.secondary")!
     public static let contentTertiary: UIColor = UIColor(named: "content.tertiary")!
     
+    public static let error: UIColor = UIColor(named: "error")!
+    
 }

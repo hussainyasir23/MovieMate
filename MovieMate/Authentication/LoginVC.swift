@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginVC: UIViewController, UITextFieldDelegate {
     
@@ -39,7 +40,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     private lazy var emailValidationLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.textColor = ColorConstants.contentSecondary
+        label.textColor = ColorConstants.error
         label.font = UIFont.systemFont(ofSize: 13 ,weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -84,7 +85,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     private lazy var passwordValidationLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.textColor = ColorConstants.contentSecondary
+        label.textColor = ColorConstants.error
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -112,30 +113,51 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         
         emailTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
-        emailTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64).isActive = true
+        emailTextField.bottomAnchor.constraint(equalTo: emailValidationLabel.topAnchor, constant: -8).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
         emailValidationLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         emailValidationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
-        emailValidationLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 8).isActive = true
+        emailValidationLabel.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -24).isActive = true
+        emailValidationLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
         passwordTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
-        passwordTextField.topAnchor.constraint(equalTo: emailValidationLabel.bottomAnchor, constant: 24).isActive = true
+        passwordTextField.bottomAnchor.constraint(equalTo: passwordValidationLabel.topAnchor, constant: -8).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
         passwordValidationLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         passwordValidationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
-        passwordValidationLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 8).isActive = true
+        passwordValidationLabel.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -48).isActive = true
+        passwordValidationLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
         loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         loginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
-        loginButton.topAnchor.constraint(equalTo: passwordValidationLabel.bottomAnchor, constant: 40).isActive = true
+        loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -128).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
     
     @objc private func didSelectLogin() {
+        let email = emailTextField.text ?? ""
+        if let errorMessage = Validator.validateEmail(email) {
+            emailValidationLabel.text = errorMessage
+            return
+        } else {
+            emailValidationLabel.text = ""
+        }
+        let password = passwordTextField.text ?? ""
+        if let errorMessage = Validator.validatePassword(password) {
+            passwordValidationLabel.text = errorMessage
+            return
+        } else {
+            passwordValidationLabel.text = ""
+        }
         
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            guard let user = authResult?.user, error == nil else {
+                return
+            }
+        }
     }
     
     @objc private func didTapOutside() {

@@ -21,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         if let _ = Auth.auth().currentUser {
-            window.rootViewController = HomeVC()
+            let homeView = HomeRouter.getHomeModule()
+            window.rootViewController = UINavigationController(rootViewController: homeView)
         } else {
             window.rootViewController = UINavigationController(rootViewController: StartVC())
         }
