@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
         trendingScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         trendingScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         trendingScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        trendingScrollView.heightAnchor.constraint(equalToConstant: (self.view.bounds.width / 1280) * 720).isActive = true
+        trendingScrollView.heightAnchor.constraint(equalToConstant: ((self.view.bounds.width / 1280) * 720) + 26).isActive = true
     }
     
     private func setupPageControl() {
@@ -82,13 +82,13 @@ class HomeViewController: UIViewController {
             }
             
             self.trendingScrollView.contentSize = CGSize(width: self.view.bounds.width * CGFloat(trendingMovies.count),
-                                                         height: (self.view.bounds.width / 1280) * 720)
+                                                         height: ((self.view.bounds.width / 1280) * 720) + 26)
             
             for (index, movie) in self.trendingMovies.enumerated() {
                 let carouselItem = CarouselItemView(frame: CGRect(x: self.view.bounds.width * CGFloat(index),
-                                                          y: 0,
-                                                          width: self.view.bounds.width,
-                                                          height: (self.view.bounds.width / 1280) * 720))
+                                                                  y: 0,
+                                                                  width: self.view.bounds.width,
+                                                                  height: ((self.view.bounds.width / 1280) * 720) + 26))
                 carouselItem.updateTitle(movie.title, rating: movie.vote_average)
                 self.backDropViews.append(carouselItem)
                 self.presenter?.fetchBackDrop(for: movie)

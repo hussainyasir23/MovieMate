@@ -20,15 +20,9 @@ class CarouselItemView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        gradientLayer.frame = overlayView.bounds
-    }
-    
     private func setupViews() {
         addSubview(backDropView)
-        addSubview(overlayView)
-        overlayView.addSubview(labelStack)
+        addSubview(labelStack)
         labelStack.addArrangedSubview(titleLabel)
         labelStack.addArrangedSubview(ratingLabel)
     }
@@ -38,16 +32,12 @@ class CarouselItemView: UIView {
         backDropView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         backDropView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         backDropView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        backDropView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        backDropView.heightAnchor.constraint(equalToConstant: (self.bounds.width / 1280) * 720).isActive = true
         
-        overlayView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        overlayView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        overlayView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        overlayView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3).isActive = true
-        
-        labelStack.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 10).isActive = true
-        labelStack.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -5).isActive = true
-        labelStack.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -10).isActive = true
+        labelStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
+        labelStack.topAnchor.constraint(equalTo: backDropView.bottomAnchor).isActive = true
+        labelStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
+        labelStack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
     private lazy var backDropView: UIImageView = {
@@ -59,24 +49,12 @@ class CarouselItemView: UIView {
         return imageView
     }()
     
-    private lazy var overlayView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var gradientLayer: CAGradientLayer = {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, ColorConstants.contentPrimary.withAlphaComponent(0.75).cgColor]
-        overlayView.layer.insertSublayer(gradientLayer, at: 0)
-        return gradientLayer
-    }()
-    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Movie Label"
         label.textAlignment = .left
-        label.textColor = ColorConstants.backgroundPrimary
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = ColorConstants.contentPrimary
         return label
     }()
     
@@ -84,14 +62,15 @@ class CarouselItemView: UIView {
         let label = UILabel()
         label.text = "9.5/10"
         label.textAlignment = .right
-        label.textColor = ColorConstants.backgroundSecondary
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = ColorConstants.contentPrimary
         return label
     }()
     
     private lazy var labelStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .center
+        stackView.alignment = .bottom
         stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -112,7 +91,6 @@ class CarouselItemView: UIView {
                                                    context: nil).size
         ratingLabel.widthAnchor.constraint(equalToConstant: ceil(requiredSize.width)).isActive = true
     }
-    
     
     func updateBackDrop(_ backDrop: UIImage) {
         self.backDropView.image = backDrop
