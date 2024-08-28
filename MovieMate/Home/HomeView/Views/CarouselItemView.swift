@@ -34,9 +34,9 @@ class CarouselItemView: UIView {
         backDropView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         backDropView.heightAnchor.constraint(equalToConstant: (self.bounds.width / 1280) * 720).isActive = true
         
-        labelStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
+        labelStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
         labelStack.topAnchor.constraint(equalTo: backDropView.bottomAnchor).isActive = true
-        labelStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
+        labelStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
         labelStack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     

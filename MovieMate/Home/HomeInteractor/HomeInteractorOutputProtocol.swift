@@ -18,4 +18,7 @@ protocol HomeInteractorOutputProtocol: AnyObject {
     
     func didFetchPoster(_ poster: UIImage, for movie: Movie)
     func didFailToFetchPoster(for movie: Movie, with error: Error)
+    
+    func didFetchNowPlayingMovies(_ movies: [Movie])
+    func didFailToFetchNowPlayingMovies(_ error: NetworkError)
 }

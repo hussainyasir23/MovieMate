@@ -13,10 +13,13 @@ protocol HomeViewControllerProtocol {
     var presenter: HomePresenterProtocol? { get set }
     
     func displayTrendingMovies(_ trendingMovies: [Movie])
-    func displayErrorInFetchingTrendingMovies()
+    func failedToFetchTrendingMovies()
     
     func displayBackDrop(_ backDrop: UIImage, for movie: Movie)
     func failedToFetchBackDrop(for movie: Movie)
+    
+    func displayNowPlayingMovies(_ nowPlayingMovies: [Movie])
+    func failedToFetchNowPlayingMovies()
     
     func displayPoster(_ poster: UIImage, for movie: Movie)
     func failedToFetchPoster(for movie: Movie)

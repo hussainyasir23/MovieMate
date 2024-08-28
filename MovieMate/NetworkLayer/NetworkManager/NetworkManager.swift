@@ -10,7 +10,7 @@ import UIKit
 
 class NetworkManager: NetworkManagerProtocol {
     
-    
+    private let authHeaderToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZGU3ZGI3OWJkZGI1YjM3YTA0ZTc1NjU3NDcyNWUwZSIsInN1YiI6IjY1MTgwNWJjZDQ2NTM3MDlkZTVjZmQ5MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rvJnVo9cT1Qvr8m8E3j6HRL-UgE2g-zC3p5ZjCJ7v00"
     
     private init() {}
     static let shared = NetworkManager()
@@ -50,6 +50,7 @@ class NetworkManager: NetworkManagerProtocol {
                 let decodedData = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decodedData))
             } catch let decodeError {
+                print("Error decoding: \(decodeError)")
                 completion(.failure(.decodingError(decodeError)))
             }
             

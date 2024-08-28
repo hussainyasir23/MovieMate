@@ -16,6 +16,10 @@ class HomePresenter: HomePresenterProtocol {
     
     func viewDidLoad() {
         interactor?.fetchTrendingMovies()
+        interactor?.fetchNowPlayingMovies()
+        interactor?.fetchPopularMovies()
+        interactor?.fetchTopRatedMovies()
+        interactor?.fetchUpcomingMovies()
     }
     
     func fetchBackDrop(for movie: Movie) {
@@ -36,7 +40,7 @@ extension HomePresenter: HomeInteractorOutputProtocol {
     }
     
     func didFailToFetchTrendingMovies(_ error: NetworkError) {
-        view?.displayErrorInFetchingTrendingMovies()
+        view?.failedToFetchTrendingMovies()
     }
     
     func didFetchBackDrop(_ backDrop: UIImage, for movie: Movie) {
@@ -53,5 +57,13 @@ extension HomePresenter: HomeInteractorOutputProtocol {
     
     func didFailToFetchPoster(for movie: Movie, with error: Error) {
         view?.failedToFetchPoster(for: movie)
+    }
+    
+    func didFetchNowPlayingMovies(_ movies: [Movie]) {
+        view?.displayNowPlayingMovies(movies)
+    }
+    
+    func didFailToFetchNowPlayingMovies(_ error: NetworkError) {
+        view?.failedToFetchNowPlayingMovies()
     }
 }
