@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIButton {
-    
+
     func styleAsLoginButton() {
         setTitleColor(ColorConstants.contentPrimary, for: .normal)
         titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)

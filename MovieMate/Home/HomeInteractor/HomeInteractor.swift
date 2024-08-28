@@ -9,21 +9,21 @@ import Foundation
 import UIKit
 
 class HomeInteractor: HomeInteractorInputProtocol {
-    
+
     weak var presenter: HomeInteractorOutputProtocol?
-    
+
     private lazy var fetchTrendingMoviesUC: FetchTrendingMovies = {
         return FetchTrendingMovies(networkManager: NetworkManager.shared)
     }()
-    
+
     private lazy var fetchImageUC: FetchImage = {
         return FetchImage(networkManager: NetworkManager.shared)
     }()
-    
+
     private lazy var fetchNowPlayingMoviesUC: FetchNowPlayingMovies = {
         return FetchNowPlayingMovies(networkManager: NetworkManager.shared)
     }()
-    
+
     func fetchTrendingMovies() {
         let request = FetchTrendingMovies.Request()
         fetchTrendingMoviesUC.execute(request: request, completion: { [weak self] (result: Result<FetchTrendingMovies.Response, NetworkError>) in
@@ -35,7 +35,7 @@ class HomeInteractor: HomeInteractorInputProtocol {
             }
         })
     }
-    
+
     func fetchBackDrop(for movie: Movie) {
         guard let backropPath = movie.backdropPath else {
             self.presenter?.didFailToFetchBackDrop(for: movie, with: NetworkError.badURL)
@@ -51,7 +51,7 @@ class HomeInteractor: HomeInteractorInputProtocol {
             }
         })
     }
-    
+
     func fetchNowPlayingMovies() {
         let request = FetchNowPlayingMovies.Request()
         fetchNowPlayingMoviesUC.execute(request: request, completion: { [weak self] (result: Result<FetchNowPlayingMovies.Response, NetworkError>) in
@@ -61,22 +61,22 @@ class HomeInteractor: HomeInteractorInputProtocol {
             case .failure(let error):
                 self?.presenter?.didFailToFetchNowPlayingMovies(error)
             }
-            
+
         })
     }
-    
+
     func fetchPopularMovies() {
-        
+
     }
-    
+
     func fetchTopRatedMovies() {
-        
+
     }
-    
+
     func fetchUpcomingMovies() {
-        
+
     }
-    
+
     func fetchPoster(for movie: Movie) {
         guard let posterPath = movie.posterPath else {
             self.presenter?.didFailToFetchPoster(for: movie, with: NetworkError.badURL)

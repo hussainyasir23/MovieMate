@@ -8,12 +8,12 @@
 import Foundation
 
 protocol HomeInteractorInputProtocol {
-    
+
     var presenter: HomeInteractorOutputProtocol? { get set }
-    
+
     func fetchTrendingMovies()
     func fetchBackDrop(for movie: Movie)
-    
+
     func fetchNowPlayingMovies()
     func fetchPopularMovies()
     func fetchTopRatedMovies()

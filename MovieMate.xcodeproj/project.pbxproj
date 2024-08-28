@@ -43,9 +43,11 @@
 		54ECF5BE2AB8873B006F2162 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ECF5BD2AB8873B006F2162 /* Validator.swift */; };
 		54ECF5C12AB8A226006F2162 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ECF5C02AB8A226006F2162 /* ColorConstants.swift */; };
 		54ECF5C32AB8B34F006F2162 /* ImageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ECF5C22AB8B34F006F2162 /* ImageConstants.swift */; };
+		62D33D9B10582F9A2866B698 /* Pods_MovieMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B54CED3F73265FA104DA28 /* Pods_MovieMate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0743B9DBF6D2CB5CE52C76CE /* Pods-MovieMate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieMate.release.xcconfig"; path = "Target Support Files/Pods-MovieMate/Pods-MovieMate.release.xcconfig"; sourceTree = "<group>"; };
 		54E355AA2AC84F9200735BBC /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		54E355AC2AC8513300735BBC /* APIVersions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIVersions.swift; sourceTree = "<group>"; };
 		54E355AE2AC8533000735BBC /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -83,6 +85,8 @@
 		54ECF5BD2AB8873B006F2162 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		54ECF5C02AB8A226006F2162 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		54ECF5C22AB8B34F006F2162 /* ImageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
+		A7B54CED3F73265FA104DA28 /* Pods_MovieMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE7E0301E0858A85D0E9279C /* Pods-MovieMate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieMate.debug.xcconfig"; path = "Target Support Files/Pods-MovieMate/Pods-MovieMate.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,12 +95,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				54EAAA6F2AB5C7D80091A383 /* FirebaseAuth in Frameworks */,
+				62D33D9B10582F9A2866B698 /* Pods_MovieMate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		548861FABD7CE72EAFF20028 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7B54CED3F73265FA104DA28 /* Pods_MovieMate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		54E355A92AC84F6B00735BBC /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +221,8 @@
 			children = (
 				54EAAA552AB5C0440091A383 /* MovieMate */,
 				54EAAA542AB5C0440091A383 /* Products */,
+				D92031EF8FABD10CF6494641 /* Pods */,
+				548861FABD7CE72EAFF20028 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,6 +291,15 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		D92031EF8FABD10CF6494641 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BE7E0301E0858A85D0E9279C /* Pods-MovieMate.debug.xcconfig */,
+				0743B9DBF6D2CB5CE52C76CE /* Pods-MovieMate.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -283,9 +307,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54EAAA672AB5C0450091A383 /* Build configuration list for PBXNativeTarget "MovieMate" */;
 			buildPhases = (
+				33416FC2D01E8A13209F7803 /* [CP] Check Pods Manifest.lock */,
 				54EAAA4F2AB5C0440091A383 /* Sources */,
 				54EAAA502AB5C0440091A383 /* Frameworks */,
 				54EAAA512AB5C0440091A383 /* Resources */,
+				540C8D342C7FC82F000B4639 /* SwiftLint Run Script */,
 			);
 			buildRules = (
 			);
@@ -307,7 +333,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					54EAAA522AB5C0440091A383 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -347,6 +373,49 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33416FC2D01E8A13209F7803 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MovieMate-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		540C8D342C7FC82F000B4639 /* SwiftLint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\" --fix\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		54EAAA4F2AB5C0440091A383 /* Sources */ = {
@@ -518,6 +587,7 @@
 		};
 		54EAAA682AB5C0450091A383 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE7E0301E0858A85D0E9279C /* Pods-MovieMate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -548,6 +618,7 @@
 		};
 		54EAAA692AB5C0450091A383 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0743B9DBF6D2CB5CE52C76CE /* Pods-MovieMate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

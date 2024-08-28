@@ -13,10 +13,10 @@ public enum APIEndpoint {
     case popularMovies
     case topRatedMovies
     case upcomingMovies
-    
+
     case image(path: String, width: Int)
     case movieDetails(id: Int)
-    
+
     var urlString: String {
         switch self {
         case .trendingMovies:

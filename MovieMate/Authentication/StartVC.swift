@@ -8,7 +8,7 @@
 import UIKit
 
 class StartVC: UIViewController {
-    
+
     // UI Components
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -18,10 +18,10 @@ class StartVC: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     private var logoCenterYConstraint: NSLayoutConstraint?
     private var logoTopConstraint: NSLayoutConstraint?
-    
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Movie Mate"
@@ -32,7 +32,7 @@ class StartVC: UIViewController {
         label.alpha = 0
         return label
     }()
-    
+
     private lazy var taglineLabel: UILabel = {
         let label = UILabel()
         label.text = "Your Movie Companion."
@@ -43,7 +43,7 @@ class StartVC: UIViewController {
         label.alpha = 0
         return label
     }()
-    
+
     private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
@@ -54,7 +54,7 @@ class StartVC: UIViewController {
         button.alpha = 0
         return button
     }()
-    
+
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
@@ -65,15 +65,15 @@ class StartVC: UIViewController {
         button.alpha = 0
         return button
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupLayouts()
     }
-    
+
     private func setupViews() {
-        
+
         view.backgroundColor = ColorConstants.backgroundPrimary
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         view.addSubview(logoImageView)
@@ -82,46 +82,46 @@ class StartVC: UIViewController {
         view.addSubview(signUpButton)
         view.addSubview(loginButton)
     }
-    
+
     private func setupLayouts() {
-        
+
         logoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         logoImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
         logoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         logoCenterYConstraint = logoImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         logoCenterYConstraint?.isActive = true
-        
+
         titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
         titleLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 16).isActive = true
-        
+
         taglineLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         taglineLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
         taglineLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
-        
+
         signUpButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         signUpButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
         signUpButton.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -24).isActive = true
         signUpButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        
+
         loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         loginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
         loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         animateLogoToTop()
     }
-    
+
     private func animateLogoToTop() {
-        
+
         logoCenterYConstraint?.isActive = false
         logoTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64)
         logoTopConstraint?.isActive = true
-        
+
         UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
             self.view.layoutIfNeeded()
         }, completion: { [weak self] _ in
@@ -129,7 +129,7 @@ class StartVC: UIViewController {
             self.showTitleLabel()
         })
     }
-    
+
     private func showTitleLabel() {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations: {
             self.titleLabel.alpha = 1
@@ -139,7 +139,7 @@ class StartVC: UIViewController {
             self.showTagline()
         })
     }
-    
+
     private func showTagline() {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations: {
             self.taglineLabel.alpha = 1
@@ -149,7 +149,7 @@ class StartVC: UIViewController {
             self.showButtons()
         })
     }
-    
+
     private func showButtons() {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations: {
             self.signUpButton.alpha = 1
@@ -158,24 +158,24 @@ class StartVC: UIViewController {
             self.loginButton.isHidden = false
         }, completion: nil)
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
+
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             updateColorsForCurrentTheme()
         }
     }
-    
+
     private func updateColorsForCurrentTheme() {
         signUpButton.styleAsLoginButton()
         loginButton.styleAsLoginButton()
     }
-    
+
     @objc private func didSelectSignUp() {
         navigationController?.pushViewController(SignUpVC(), animated: true)
     }
-    
+
     @objc private func didSelectLogin() {
         navigationController?.pushViewController(LoginVC(), animated: true)
     }

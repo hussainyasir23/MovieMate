@@ -11,6 +11,6 @@ protocol UseCaseProtocol {
     associatedtype RequestType: BaseRequest
     associatedtype ResponseType: BaseResponse
     associatedtype ErrorType: Error
-    
+
     func execute(request: RequestType, completion: @escaping (Result<ResponseType, ErrorType>) -> Void)
 }

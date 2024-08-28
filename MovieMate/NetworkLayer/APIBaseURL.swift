@@ -10,7 +10,7 @@ import Foundation
 public enum APIBaseURL {
     case tmdbAPI
     case tmdbImageAPI
-    
+
     var urlString: String {
         switch self {
         case .tmdbAPI:

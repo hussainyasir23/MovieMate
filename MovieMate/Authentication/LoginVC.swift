@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 
 class LoginVC: UIViewController, UITextFieldDelegate {
-    
+
     private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -23,29 +23,29 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         textField.spellCheckingType = .no
         textField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let emailIconView = UIImageView(frame: CGRect(x: 7.5, y: 2.5, width: 15, height: 15))
         emailIconView.image = ImageConstants.email
         emailIconView.tintColor = ColorConstants.contentPrimary
         emailIconView.contentMode = .scaleAspectFit
-        
+
         let emailIconContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 20))
         emailIconContainerView.addSubview(emailIconView)
         textField.leftView = emailIconContainerView
         textField.leftViewMode = .always
-        
+
         return textField
     }()
-    
+
     private lazy var emailValidationLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.textColor = ColorConstants.error
-        label.font = UIFont.systemFont(ofSize: 13 ,weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -59,20 +59,20 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         textField.spellCheckingType = .no
         textField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let passwordIconView = UIImageView(frame: CGRect(x: 7.5, y: 2.5, width: 15, height: 15))
         passwordIconView.image = ImageConstants.password
         passwordIconView.contentMode = .scaleAspectFit
         passwordIconView.tintColor = ColorConstants.contentPrimary
-        
+
         let passwordIconContainerView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 20))
         passwordIconContainerView.addSubview(passwordIconView)
         textField.leftView = passwordIconContainerView
         textField.leftViewMode = .always
-        
+
         return textField
     }()
-    
+
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
@@ -81,7 +81,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     private lazy var passwordValidationLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -90,14 +90,14 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupViews()
         setupLayouts()
     }
-    
+
     private func setupViews() {
         view.backgroundColor = ColorConstants.backgroundPrimary
         view.addSubview(emailTextField)
@@ -108,35 +108,35 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
         view.addGestureRecognizer(tapGesture)
     }
-    
+
     private func setupLayouts() {
-        
+
         emailTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
         emailTextField.bottomAnchor.constraint(equalTo: emailValidationLabel.topAnchor, constant: -8).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        
+
         emailValidationLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         emailValidationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
         emailValidationLabel.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -24).isActive = true
         emailValidationLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        
+
         passwordTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
         passwordTextField.bottomAnchor.constraint(equalTo: passwordValidationLabel.topAnchor, constant: -8).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        
+
         passwordValidationLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         passwordValidationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
         passwordValidationLabel.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -48).isActive = true
         passwordValidationLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        
+
         loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
         loginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
         loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -128).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
-    
+
     @objc private func didSelectLogin() {
         let email = emailTextField.text ?? ""
         if let errorMessage = Validator.validateEmail(email) {
@@ -152,33 +152,32 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         } else {
             passwordValidationLabel.text = ""
         }
-        
+
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             guard let user = authResult?.user, error == nil else {
                 return
             }
         }
     }
-    
+
     @objc private func didTapOutside() {
         view.endEditing(true)
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
+
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             updateColorsForCurrentTheme()
         }
     }
-    
+
     private func updateColorsForCurrentTheme() {
         loginButton.styleAsLoginButton()
     }
-    
-    
+
     // MARK: - UITextFieldDelegate
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
@@ -188,7 +187,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == emailTextField,
            let email = emailTextField.text {
